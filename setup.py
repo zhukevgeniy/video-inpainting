@@ -11,7 +11,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 setup(
     name="Video-Inpainting",
     version="0.1.1",
-    packages=find_packages(),
+    packages=find_packages(exclude=['tests']),
     package_data={
         '': ['*.txt']
     },
