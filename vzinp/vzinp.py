@@ -1,24 +1,23 @@
 from vzinp.inpaint_video import inpaint_video
-from vzinp.utills.get_video_params import get_video_params
+from vzinp.utills.get_file_params import get_file_params
 
 
 def seed_random_numbers():
     pass
 
 
-def read_video(video_file, file_type):
+def read_input_file(file_path, file_type):
     print("Reading input %s" % file_type)
-    return get_video_params(video_file=video_file)[0]
+
+    return get_file_params(file_path=file_path)
 
 
 def start_inpaint(**kwargs):
-    image_volume = read_video(video_file=kwargs["video_file"], file_type="video")
-    occlusion_volume = read_video(kwargs["occlusion_file"], file_type="occlusion")
+    input_video_volume = read_input_file(file_path=kwargs["video_file"], file_type="video")
+    occlusion_volume = read_input_file(file_path=kwargs["occlusion_file"], file_type="occlusion")
 
     print("Starting the video inpainting... ")
 
-    [video_size, video_name] = get_video_params(video_file=kwargs["video_file"])
+    inpainting_params = (kwargs["level"], kwargs["asd"], kwargs["act"], kwargs["qwd"], 'file', kwargs["video_file"])
 
-    inpainting_params = (kwargs["level"], kwargs["asd"], kwargs["act"], kwargs["qwd"], 'file', video_name)
-
-    image_volume_output = inpaint_video(image_volume, occlusion_volume, inpainting_params)
+    image_volume_output = inpaint_video(input_video_volume, occlusion_volume, inpainting_params)
