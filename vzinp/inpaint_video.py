@@ -43,9 +43,10 @@ def inpaint_video(image_volume, occlusion_volume, inpainting_params):
     max_nb_itarations = 20
     residual_tresh = .1
 
-    # img_volume_pyramid = get_image_volume_pyramid(image_volume, filter_size, sigma, max_level, dims[2])
+    img_volume_pyramid = get_image_volume_pyramid(image_volume[0], filter_size, sigma, max_level, dims[2])
 
-    occlusion_volume_pyramid = get_image_volume_pyramid(image_volume, filter_size, sigma, max_level, dims[2])
+    occlusion_volume_pyramid = get_image_volume_pyramid(occlusion_volume[0], filter_size, sigma, max_level, dims[2])
+
 
     if texture_features_activated:
         print("Calculating texture feature pyramids")
